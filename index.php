@@ -92,26 +92,29 @@ for ($i = 0; $i <= 10; $i++) {
 }
  
 
-
 ?>
 
 <h4 style="color:blue; padding-left:80px;"> ***** ND 5 ****** </h4>
- <?php
-// Prieš tai nupieštam kvadratui nupieškite raudonas istrižaines.
- 
-echo ' kvadratas iš 10x10 žvaigždučių, reikia nupiešti įstrižaines ?';
-echo '<br>';
 
-for ($i = 1; $i <= 10; $i++) {
-    echo   "<span style='padding-right: 8px; color: rgb(0, 0, 255); font-weight: bold; font-size: 22;'> *  </span>". ($i);
-    for ($a = 1; $a <= 9 ; $a++) { 
-    echo "<span style='padding-right: 8px; color: rgb(0, 200, 255); font-weight: bold; font-size: 22;'> * </span>". ($a); 
-    } 
+<?php
+// Prieš tai nupieštam kvadratui nupieškite raudonas istrižaines.
+echo ' kvadratas is  10x10 žvaigždučių su įstrižainėmis';
+echo  '<br>';
+for ($i = 1; $i < 11; $i++) {
+    // echo   "<span style='padding-right: 8px; color: rgb(0, 0, 255); font-weight: bold; font-size: 22;'> *  </span>";
+    for ($a = 1; $a <= 10 ; $a++) { 
+        if($a == $i || $a == 11 - $i){
+    echo "<span style='padding-right: 10px; color: rgb(255, 0, 0); font-weight: bold; font-size: 22;'> * </span>"; 
+    } else {
+        echo "<span style='padding-right: 10px; color: rgb(0, 200, 255); font-weight: bold; font-size: 22;'> * </span>"; 
+    }
+}
     echo  '<br>';
 }
 
- 
+echo '<br>';
     ?>
+
 
 <h4 style="color:blue; padding-left:80px;"> ***** ND 6 ****** </h4><br>;
 <!-- <span style ='padding-right: 8px; color:brown;' > </style> -->
@@ -120,63 +123,27 @@ for ($i = 1; $i <= 10; $i++) {
 // 6.	Metam monetą. 
 // Monetos kritimo rezultatą imituojam rand() funkcija, kur 0 yra herbas, o 1 - skaičius.
 // Monetos metimo rezultatus išvedame į ekraną atskiroje eilutėje: 
-// “S” jeigu iškrito skaičius ir “H” jeigu herbas. 
+// “S” jeigu iškrito skaičius 
+// ir “H” jeigu herbas. 
 // Suprogramuokite tris skirtingus scenarijus kai monetos metimą stabdome:
 // a)	Iškritus herbui;
 // b)	Tris kartus iškritus herbui;
 // c)	Tris kartus iš eilės iškritus herbui;
 
-echo '<br><br>Scenarijus A<br>';
-$finish = false;
-do{
-    $coin = rand(0, 1);
-    if($coin == 0) {
-        $coin = 'H';
-        echo '<br>'.$coin;
-        $finish = true;
-    }else {
-        $coin = 'S';
-        echo '<br>'.$coin;
+echo '<br> ********variantas A *********** <br>';
+ 
+do {
+    $krentaMoneta = rand(0,1);
+    if ($krentaMoneta = 0) {
+echo "iškrito skaičius S <br>";
     }
-} while(!$finish) ;
-/*************************************/
-echo '<br><br>Scenarijus B<br>';
-$count = 0;
-while($count < 3) {
-    $coin = rand(0, 1);
-    if($coin == 0) {
-        $coin = 'H';
-        echo '<br>'.$coin;
-        $count++;
-    }else {
-        $coin = 'S';
-        echo '<br>'.$coin;
-    }
-}
-/*************************************/
-echo '<br><br>Scenarijus C<br>';
-$newArr =[];
-$end = false;
-while(!$end) {
-    $coin = rand(0, 1);
-    if($coin == 0) {
-        $coin = 'H';
-        echo '<br>'.$coin;
-        array_push($newArr, $coin);
-        for ($i= 0; $i < count($newArr); $i++ ){
-            for ($j = $i+1; $j < count($newArr) - 1; $j++){
-                if($newArr[$j-1] == 'H' && $newArr[$j] == 'H' && $newArr[$j+1] == 'H'){
-                    $end = true;
-                    //break;
-                }
-            }
-          }
-    }else {
-        $coin = 'S';
-        echo '<br>'.$coin;
-        array_push($newArr, $coin);
-    }
-}
+    $krentaMoneta++;
+} while ($krentaMoneta = 1);
+echo "iškrito herbas: H <br>";
+
+echo '<br><br>********variantas B ***********<br>';
+
+
 
 ?>
 
