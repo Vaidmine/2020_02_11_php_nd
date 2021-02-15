@@ -66,7 +66,7 @@ echo '<br><br>';
   $dalinasiIS = "77";
   for ($i= $dalinasiIS + 1; $i < $randomSK; $i++) { 
       if($i % 77 ===0){
-        $dalinasiIS .= $i  . ",". " " ;
+        $dalinasiIS .= ",". " ". $i ;
       }
   }
  echo $dalinasiIS;
@@ -116,7 +116,7 @@ echo '<br>';
     ?>
 
 
-<h4 style="color:blue; padding-left:80px;"> ***** ND 6 ****** </h4><br>;
+<h4 style="color:blue; padding-left:80px;"> ***** ND 6 ****** </h4><br>
 <!-- <span style ='padding-right: 8px; color:brown;' > </style> -->
 
  <?php
@@ -130,20 +130,76 @@ echo '<br>';
 // b)	Tris kartus iškritus herbui;
 // c)	Tris kartus iš eilės iškritus herbui;
 
-echo '<br> ********variantas A *********** <br>';
- 
+echo '<br> ******** variantas A ***********';
+echo '<br>';
 do {
     $krentaMoneta = rand(0,1);
-    if ($krentaMoneta = 0) {
-echo "iškrito skaičius S <br>";
-    }
-    $krentaMoneta++;
-} while ($krentaMoneta = 1);
+} while ($krentaMoneta == 1);
 echo "iškrito herbas: H <br>";
 
-echo '<br><br>********variantas B ***********<br>';
+echo '<br>******** variantas A dar kitas ***********';
+echo '<br>';
+$herbas = 0;
+$kartai = 0;
+while($herbas < 1) {
+    $random = rand(0, 1);
+    if($random == 0) {
+        $herbas++;
+        echo 'H' . '<br>';
+        $kartai++;
+    } else {
+        echo 'S' . '<br>';
+        $kartai++;
+    }
+}
+echo 'reikejo ' . $kartai . 'kartų  kol iskrito H';
+
+echo '<br>******** variantas B ***********';
+echo '<br>';
+$skaiciuojam = 0;
+$metimai = 0;
+while($skaiciuojam < 3) {
+    $random = rand(0, 1);
+    if($random == 0) {
+        $skaiciuojam++;
+        echo 'H' . '<br>';
+        $metimai++;
+    } else {
+        echo 'S' . '<br>';
+        $metimai++;
+    }
+}
+echo 'reikejo ' . $metimai . ' kartų, kol iskrito H tris kartus';
+
+echo '<br>******** variantas C ***********';
+echo '<br>';
+$herbas = 0;
+$metimai = 0;
+while($herbas < 3) {
+    $moneta = rand(0, 1);
+    if($moneta) {
+        $herbas++;
+        echo 'iskrito H' . '<br>';
+        $metimai++;
+    } 
+    else {
+        $herbas = 0;
+        echo 'iskrito S' . '<br>';
+        $metimai++;
+    }
+}
+echo 'Reikejo ' . $metimai . ' kol iskrito H is eiles';
+
+// do {
+//     $krentaMoneta1 = rand(0,1);
+// } while ($krentaMoneta1 == 1 );
+//     { if ($krentaMoneta1 % 3 == 1 )
+//     echo ("3 kartus iškrito herbas: H <br>") ;
+// }
 
 
+// echo "iškrito herbas: H <br>";
+// echo str_repeat("iškrito herbas: H <br>", 3) ;
 
 ?>
 
@@ -156,6 +212,27 @@ echo '<br><br>********variantas B ***********<br>';
 // Taškų kiekį generuokite funkcija rand(). 
 // Žaidimą laimi tas, kas greičiau surenka 222 taškus. 
 // Partijas kartoti tol, kol kažkuris žaidėjas pirmas surenka 222 arba daugiau taškų.
+
+$taskaiKazio = 0;
+$taskaiPetro = 0;
+$taskai = 0;
+
+while ($taskaiKazio < 222 && $taskaiPetro < 222) {
+    $kazys = rand(10, 20);
+    $petras = rand(5, 25);
+    if($kazys > $petras) {
+        echo 'partija laimejo Kazys ' . $kazys . '<br>'; 
+        $taskaiKazio += $kazys;
+    } else if ($kazys < $petras) {
+        echo 'partija laimejo Petras ' . $petras . '<br>';
+        $taskaiPetro += $petras;
+    }
+}
+if($taskaiKazio > $taskaiPetro) {
+    echo 'laimejo Kazys ' . $taskaiKazio;
+} else {
+    echo 'laimejo Petras ' . $taskaiPetro;
+}
 
 ?>
 
@@ -170,7 +247,7 @@ echo '<br><br>********variantas B ***********<br>';
 
 $x = 1;
 echo "<div style='text-align:center;'>";
-//  echo "<div style='text-offset: 50 px;'>";
+//  echo *"<div style='text-offset: 50 px;'>";
  
 for ($i = 0; $i < 10; $i++) {
         for ($j = 0; $j < $x; $j++) {
@@ -203,6 +280,32 @@ echo '<br><br>';
 // $c = '10 bezdzioniu \n suvalge 20 bananu.';
 // (Stringas viengubose ir dvigubose kabutėse)
 
+$startTime = microtime(true);
+
+for($i = 0; $i < 1000000; $i++) {
+    $c = "10 beždžionių \n suvalgė 20 bananų. <br>";
+}
+$kiekUztruko = microtime(true) - $startTime;
+echo 'pirmas laikas' . $kiekUztruko . '<br>';
+
+$startTimeTwo = microtime(true);
+
+for($i = 0; $i < 1000000; $i++) {
+    $c = '10 beždžionių \n suvalgė 20 bananų.' . '<br>';
+   
+}
+echo '(Stringo rašymui naudojamos dvigubos kabutės) <br>';
+$kiekUztrukoTwo = microtime(true) - $startTimeTwo;
+echo 'antras laikas' . (microtime(true) - $startTimeTwo) . '<br>';
+echo '(Stringo rašymui naudojamos viengubos kabutės) <br>';
+echo '<br>';
+
+if($kiekUztruko > $kiekUztrukoTwo) {
+    echo 'Su dvigubom kabutem uztrunka ilgiau';
+} else if ($kiekUztruko < $kiekUztrukoTwo) {
+    echo 'Su viengubom kabutem uztrunka ilgiau' . '<br>';
+}
+
 
 ?>
 
@@ -220,4 +323,31 @@ echo '<br><br>';
 // bet yra 50% tikimybė (pasinaudokite rand() funkcija tikimybei sumodeliuoti), 
 // kad smūgis nepataikys į vinį. 
 // Suskaičiuokite kiek reikia smūgių.
+
+$maziSmugiai = 0;
+for ($i = 0; $i < 5; $i++) {
+    $viniesIlgis = 0;
+    while ($viniesIlgis < 85) {
+        $viniesIlgis += rand(5, 20);
+        $maziSmugiai++;
+    }
+}
+echo 'Reikėjo ' . $maziSmugiai . ' smūgių kol vinis buvo įkalta' . '<br>';
+
+$dideliSmugiai = 0;
+for ($i = 0; $i < 5; $i++) {
+    $viniesIlgis = 0;
+    while ($viniesIlgis < 85) {
+        $tikimybe = rand(0, 1);
+        if($tikimybe == 0) {
+            $dideliSmugiai += 0;
+        } else if ($tikimybe == 1) {
+            $viniesIlgis += rand(20, 30);
+            $dideliSmugiai++;
+        }
+    }
+}
+echo 'Reikėjo ' . $dideliSmugiai . ' smūgių kol vinis buvo įkalta' . '<br>';
+
+
 ?>
